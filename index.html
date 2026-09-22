@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMS PROMO — Achadinhos Amazon, Shopee e Mercado Livre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo-escuro: #3B1264;
+    --roxo: #6C2BD9;
+    --roxo-claro: #A985F0;
+    --lilas-fundo: #F6F1FF;
+    --magenta: #E0299A;
+    --texto: #241537;
+    --texto-suave: #6E6180;
+    --branco: #FFFFFF;
+    --borda: #E7DBFB;
+    --radius: 14px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ -webkit-tap-highlight-color: transparent; }
+
+  body{
+    background: var(--lilas-fundo);
+    color: var(--texto);
+    font-family: 'Manrope', sans-serif;
+    padding-bottom: 40px;
+  }
+
+  h1,h2,.logo,.preco-atual,.chip{
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index: 10;
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo) 70%);
+    padding: 18px 16px 14px;
+    color: var(--branco);
+  }
+
+  .logo-linha{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom: 4px;
+  }
+
+  .logo{
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
+  .logo span{ color: #FFD166; }
+
+  .tagline{
+    font-size: 13px;
+    color: #E3D6FF;
+    margin-bottom: 14px;
+  }
+
+  /* Chips de categoria */
+  .categorias{
+    display:flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .categorias::-webkit-scrollbar{ display:none; }
+
+  .chip{
+    flex: 0 0 auto;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--branco);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s ease, transform .1s ease;
+  }
+
+  .chip.ativo{
+    background: var(--branco);
+    color: var(--roxo-escuro);
+    border-color: var(--branco);
+  }
+
+  .chip:active{ transform: scale(0.96); }
+
+  /* ---------- Grid de produtos ---------- */
+  main{
+    padding: 16px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .contagem{
+    font-size: 13px;
+    color: var(--texto-suave);
+    margin: 4px 4px 12px;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .card{
+    background: var(--branco);
+    border-radius: var(--radius);
+    border: 1px solid var(--borda);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+  }
+
+  .foto-wrap{
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--lilas-fundo);
+    overflow: hidden;
+  }
+
+  .foto-wrap img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    display:block;
+  }
+
+  .desconto{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background: var(--magenta);
+    color: var(--branco);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+
+  .loja-badge{
+    position:absolute;
+    top:8px;
+    right:8px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 999px;
+    color: var(--branco);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .loja-amazon{ background:#1E1E1E; }
+  .loja-shopee{ background:#EE4D2D; }
+  .loja-mercadolivre{ background:#2D3277; }
+
+  .info{
+    padding: 10px 10px 12px;
+    display:flex;
+    flex-direction: column;
+    gap: 6px;
+    flex:1;
+  }
+
+  .categoria-label{
+    font-size: 11px;
+    color: var(--roxo);
+    font-weight: 700;
+  }
+
+  .nome{
+    font-size: 13px;
+    line-height: 1.35;
+    color: var(--texto);
+    min-height: 34px;
+  }
+
+  .precos{
+    display:flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .preco-antigo{
+    font-size: 12px;
+    color: var(--texto-suave);
+    text-decoration: line-through;
+  }
+
+  .preco-atual{
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--roxo-escuro);
+  }
+
+  .btn-oferta{
+    margin-top: 4px;
+    background: var(--roxo);
+    color: var(--branco);
+    text-align: center;
+    padding: 9px 0;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display:block;
+  }
+
+  .btn-oferta:active{ transform: scale(0.98); }
+
+  .vazio{
+    text-align: center;
+    color: var(--texto-suave);
+    padding: 40px 20px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 480px){
+    .grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ---------- Bloco VIP WhatsApp ---------- */
+  .vip{
+    margin: 28px 4px 8px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border-radius: var(--radius);
+    padding: 20px;
+    color: var(--branco);
+    text-align: center;
+  }
+
+  .vip-emoji{
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .vip h2{
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .vip p{
+    font-size: 13px;
+    color: #EAFBF1;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .btn-vip{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    background: var(--branco);
+    color: #128C7E;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 11px 20px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Rodapé ---------- */
+  footer{
+    margin: 32px 4px 0;
+    padding: 22px 16px 4px;
+    text-align: center;
+    border-top: 1px solid var(--borda);
+  }
+
+  .redes{
+    display:flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .rede-icone{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--roxo-escuro);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--branco);
+    transition: transform .12s ease;
+  }
+
+  .rede-icone:active{ transform: scale(0.92); }
+
+  .rede-icone svg{ width: 19px; height: 19px; }
+
+  .aviso-afiliado{
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--texto-suave);
+    max-width: 520px;
+    margin: 0 auto 18px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-linha">
+    <span class="logo">AMS<span>.</span>PROMO</span>
+  </div>
+  <p class="tagline">Os melhores achadinhos da Amazon, Shopee e Mercado Livre 💜</p>
+  <div class="categorias" id="categorias"></div>
+</header>
+
+<main>
+  <p class="contagem" id="contagem"></p>
+  <div class="grid" id="grid"></div>
+
+  <section class="vip">
+    <div class="vip-emoji">💜</div>
+    <h2>Entre no grupo VIP do WhatsApp</h2>
+    <p>Receba as melhores promoções em primeira mão, direto no seu celular.</p>
+    <a class="btn-vip" href="#" id="link-vip-whatsapp" target="_blank" rel="noopener">
+      Entrar no grupo VIP
+    </a>
+  </section>
+</main>
+
+<footer>
+  <div class="redes">
+    <a class="rede-icone" href="#" id="link-instagram" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="rede-icone" href="#" id="link-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 7.2 3.8zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.2 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/></svg>
+    </a>
+  </div>
+  <p class="aviso-afiliado">
+    AMS PROMO participa de programas de afiliados da Amazon, Mercado Livre e Shopee. Isso significa que podemos receber uma comissão sobre compras feitas através dos links deste site, sem custo adicional para você. Preços e disponibilidade podem mudar a qualquer momento.
+  </p>
+</footer>
+
+<script>
+  /* =========================================================
+     👉 TROQUE AQUI OS LINKS DO GRUPO VIP E DAS REDES SOCIAIS.
+     ========================================================= */
+  const LINKS = {
+    grupoVipWhatsapp: "https://chat.whatsapp.com/CwyVIO7nFTsBVI0nlFo4sr?s=hd&p=i&mlu=4",
+    instagram: "https://www.instagram.com/ams.promo",
+    whatsapp: "https://chat.whatsapp.com/CwyVIO7nFTsBVI0nlFo4sr?s=hd&p=i&mlu=4"
+  };
+
+  /* =========================================================
+     👉 PARA ADICIONAR OU EDITAR PRODUTOS, MEXA SÓ AQUI EMBAIXO.
+     Cada produto é um item deste array. Copie um bloco { ... },
+     cole antes do fechamento "]" e troque os valores.
+
+     categoria: "Casa" | "Moda" | "Beleza" | "Bebê" | "Eletrônicos" | "Achadinhos"
+     loja: "amazon" | "shopee" | "mercadolivre"
+     O desconto (%) é calculado sozinho a partir do preço antigo e do atual.
+     ========================================================= */
+  const produtos = [
+    {
+  nome: "Contorno em bastão Niina Secrets",
+  categoria: "Beleza",
+  imagem: "IMG_7944.jpg",
+  precoAntigo: 61.99,
+  precoAtual: 39.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0d6pVAbr"
+},
+{
+  nome: "Protetor Solar com cor FPS60 Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_protetorcorelseve.jpg",
+  precoAntigo: 55.19,
+  precoAtual: 33.50,
+  loja: "amazon",
+  link: "https://link.amazon/B0e47OD8i"
+},
+{
+  nome: "Kit Wella Oil Reflections Mask Duo",
+  categoria: "Beleza",
+  imagem: "IMG_kitwellacrpequeno.jpg",
+  precoAntigo: 218.90,
+  precoAtual: 207.95,
+  loja: "amazon",
+  link: "https://link.amazon/B0e04gYEl"
+},
+{
+  nome: "Wella Oil Reflections Mascara Potencializadora de Luminosidade",
+  categoria: "Beleza",
+  imagem: "IMG_hidratacaowellacr.jpg",
+  precoAntigo: 302.00,
+  precoAtual: 207.99,
+  loja: "amazon",
+  link: "https://link.amazon/B0eByu2NE"
+},
+{
+  nome: "Wella Oil Reflections oleo capilar",
+  categoria: "Beleza",
+  imagem: "IMG_oleowellacr.jpg",
+  precoAntigo: 209.00,
+  precoAtual: 125.91,
+  loja: "amazon",
+  link: "https://link.amazon/B0gb6xVyX"
+},
+{
+  nome: "Sallve bastao antioliosidade",
+  categoria: "Beleza",
+  imagem: "IMG_oilcontrolsalve.jpg",
+  precoAntigo: 74.90,
+  precoAtual: 55.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0hBl2eoR"
+},
+{
+  nome: "Sabonete liquido detox Payot",
+  categoria: "Beleza",
+  imagem: "IMG_sabonetefacialpayol.jpg",
+  precoAntigo: 33.90,
+  precoAtual: 29.00,
+  loja: "amazon",
+  link: "https://link.amazon/B0bvM6eMf"
+},
+{
+  nome: "Revitalift Hialurônico Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_cremefacialelseve.jpg",
+  precoAntigo: 64.90,
+  precoAtual: 37.70,
+  loja: "amazon",
+  link: "https://link.amazon/B06h8TtGP"
+},
+{
+  nome: "Fone de ouvido sem fio Philips",
+  categoria: "Eletronicos",
+  imagem: "IMG_fonephilips.jpg",
+  precoAntigo: 144.00,
+  precoAtual: 109.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0degMAhm"
+},
+{
+  nome: "Hidrapet Loção 500ml",
+  categoria: "Achadinhos",
+  imagem: "IMG_hidrapetcreme.jpg",
+  precoAntigo: 270.80,
+  precoAtual: 174.50,
+  loja: "amazon",
+  link: "https://link.amazon/B0iQxT38l"
+},
+{
+  nome: "Macaco Chalesco para cães",
+  categoria: "Achadinhos",
+  imagem: "IMG_macacopelucia.jpg",
+  precoAntigo: 35.00,
+  precoAtual: 25.65,
+  loja: "amazon",
+  link: "https://link.amazon/B08cOgPCO"
+},
+{
+  nome: "Secador Britânia 5 em 1",
+  categoria: "Beleza",
+  imagem: "IMG_secadorbritania.jpg",
+  precoAntigo: 769.00,
+  precoAtual: 348.40,
+  loja: "amazon",
+  link: "https://link.amazon/B0ivy3XIb"
+},
+    {
+      nome: "Bruma facial hidratante Niina Secrets",
+      categoria: "Beleza",
+      imagem: "IMG_7953.jpg",
+      precoAntigo: 69.99,
+      precoAtual: 49.90,
+      loja: "amazon",
+      link: "https://link.amazon/B0b9UgvSD"
+}, 
+{
+  nome: "Mascara de tratamento siàge nutri rosé",
+  categoria: "Beleza",
+  imagem: "IMG_siagerosehidratacao.jpg",
+  precoAntigo: 75.99,
+  precoAtual: 54.14,
+  loja: "amazon",
+  link: "https://link.amazon/B0d2ciEZf"
+},
+{
+   nome: "Calça Alfaiataria",
+   categoria: "Moda",
+   imagem: "IMG_calcaalfaiataria.jpg",
+   precoAntigo: 159.90,
+   precoAtual: 51.80,
+   loja: "shopee",
+   link: "https://s.shopee.com.br/3B76UTGOTI"
+ },
+ {
+  nome: "Bepantol Baby 100g",
+  categoria: "Bebê",
+  imagem: "IMG_bepantolbaby.jpg.jpg",
+  precoAntigo: 59.99,
+  precoAtual: 44.90,
+  loja: "amazon",
+  link: "https://link.amazon/B045sjrlr"
+},
+{
+  nome: "Leavein Uniq One",
+  categoria: "Beleza",
+  imagem: "IMG_leaveinuniqone.JPG",
+  precoAntigo: 128.90,
+  precoAtual: 64.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0hij4oaL"
+},
+{
+  nome: "Óleo extraordinàrio Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_oleoextraordinario.jpg.jpg",
+  precoAntigo: 49.90,
+  precoAtual: 29.99,
+  loja: "amazon",
+  link: "https://link.amazon/B09N1quVn"
+},
+{
+  nome: "Dispenser lavanderia",
+  categoria: "Casa",
+  imagem: "IMG_dispenserlavanderia.jpg",
+  precoAntigo: 64.90,
+  precoAtual: 32.45,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/8plTFuHuLI"
+},
+{
+  nome: "Lola Danos Vorazes",
+  categoria: "Beleza",
+  imagem: "IMG_loladanosvorazes.JPG",
+  precoAntigo: 64.90,
+  precoAtual: 34.21,
+  loja: "amazon",
+  link: "https://link.amazon/B0hgvY60n"
+},
+    {
+   nome: "Bio Oil óleo corporal 125ml",
+   categoria: "Beleza",
+   imagem: "IMG_7948.jpg",
+   precoAntigo: 85.99,
+   precoAtual: 56.90,
+   loja: "amazon",
+   link: "https://link.amazon/B0auvx4Tf"
+ },
+    {
+      nome: "Kit Wella Invigo",
+      categoria: "Beleza",
+      imagem: "IMG_Wella.JPG",
+      precoAntigo: 508.92,
+      precoAtual: 474.90,
+      loja: "amazon",
+      link: "https://link.amazon/B054dOhHM"
+    },
+    {
+      nome: "Truss uso obrigatòrio",
+      categoria: "Beleza",
+      imagem: "IMG_trussusoobrigatorio.JPG",
+      precoAntigo: 159.99,
+      precoAtual: 100.48,
+      loja: "amazon",
+      link: "https://link.amazon/B09S6WCNP"
+    },
+    {
+      nome: "Trenzinho natalino",
+      categoria: "Achadinhos",
+      imagem: "IMG_tremnatalino.jpg",
+      precoAntigo: 59.99,
+      precoAtual: 14.34,
+      loja: "shopee",
+      link: "https://s.shopee.com.br/LmuxFVeBX"
+    },
+    {
+      nome: "Sapateira suapensa",
+      categoria: "Casa",
+      imagem: "IMG_sapateirasuspensa.jpg",
+      precoAntigo: 350.00,
+      precoAtual: 210.99,
+      loja: "shopee",
+      link: "https://s.shopee.com.br/40gDKCPm2D"
+    },
+    {
+      nome: "Protetor solar principia",
+      categoria: "Beleza",
+      imagem: "IMG_protetorprincipia.JPG",
+      precoAntigo: 69.00,
+      precoAtual: 49.00,
+      loja: "amazon",
+      link: "https://link.amazon/B08d5HQEa"
+    },
+    {
+   nome: "Cronolola capilar kit feira",
+   categoria: "Beleza",
+   imagem: "IMG_cronololafeira.JPG",
+   precoAntigo: 69.90,
+   precoAtual: 54.56,
+   loja: "amazon",
+   link: "https://link.amazon/B02wtOPbc"
+    },
+    {
+   nome: "Ventilador Mondial 30cm",
+   categoria: "Casa",
+   imagem: "IMG_ventiladorminimondial.jpg.jpg",
+   precoAntigo: 139.90,
+   precoAtual: 113.88,
+   loja: "amazon",
+   link: "https://link.amazon/B0eiAYD9l"
+    },
+    {
+   nome: "Sabonete Facial Garnier",
+   categoria: "Beleza",
+   imagem:"IMG_sabonetefacialgarnier.jpg.jpg",
+   precoAntigo:47.29,
+   precoAtual: 25.16,
+   loja: "amazon",
+   link: "https://link.amazon/B07e716U4"
+    },
+    {
+   nome: "Fruteira minimalista",
+   categoria: "Casa",
+   imagem: "IMG_fruteiraminimalista.jpg",
+   precoAntigo: 60.00,
+   precoAtual: 38.80,
+   loja: "shopee" ,
+   link: "https://s.shopee.com.br/2LXzTk9rQr"
+    },
+    {
+   nome: "Kit Sabonete Phebo",
+   categoria: "Beleza",
+   imagem: "IMG_kitsabonetphoebo.jpg",
+   precoAntigo: 50.00,
+   precoAtual: 30.99,
+   loja: "amazon",
+   link: "https://link.amazon/B0754oV0o"
+    },
+     {
+   nome: "Corretivo camuflagem Makiê",
+   categoria: "Beleza",
+   imagem: "IMG_camuflagem.jpg",
+   precoAntigo: 92.50,
+   precoAtual: 70.06,
+   loja: "amazon",
+   link: "https://link.amazon/B0bFgcRBZ"
+ },
+ {
+  nome: "Hidratante labial Beta",
+  categoria: "Beleza",
+  imagem: "IMG_hodratantebeta.jpg",
+  precoAntigo: 19.90,
+  precoAtual: 14.99,
+  loja: "amazon",
+  link: "https://link.amazon/B02LJIRgo"
+},
+{
+  nome: "Siàge Mascara Capilar Acelera o Crescimento",
+  categoria: "Beleza",
+  imagem: "IMG_siagehitratacaoroxo.jpg",
+  precoAntigo: 56.90,
+  precoAtual: 52.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0bM1q9wM"
+},
+{
+  nome: "Carrinho de bebê travel system safety Black Graphite",
+  categoria: "Bebê",
+  imagem: "IMG_carrinhobebe.jpg",
+  precoAntigo: 2399.00,
+  precoAtual: 2085.51,
+  loja: "amazon",
+  link: "https://link.amazon/B0bRTvFNt"
+},
+{
+  nome: "Downy Amaciante de Roupas Concentrado Brisa Suave 3L",
+  categoria: "Casa",
+  imagem: "IMG_amaciantedowny.jpg",
+  precoAntigo: 74.77,
+  precoAtual: 54.99,
+  loja: "amazon",
+  link: "https://link.amazon/B0eSoNG8M"
+},
+{
+  nome: "Caneta Delineadora Pullpen Franciny Ehlke",
+  categoria: "Beleza",
+  imagem: "IMG_delineadorfran.jpg",
+  precoAntigo: 55.90,
+  precoAtual: 39.77,
+  loja: "amazon",
+  link: "https://link.amazon/B05HP362a"
+},
+{
+  nome: "Cacheador Philco Bivolt",
+  categoria: "Beleza",
+  imagem: "IMG_cacheadorphilco.jpg",
+  precoAntigo: 114.70,
+  precoAtual: 78.00,
+  loja: "amazon",
+  link: "https://link.amazon/B007aGCUt"
+},
+{
+  nome: "Eucerin protetor com cor FPS70",
+  categoria: "Beleza",
+  imagem: "IMG_protetoreucerin.jpg",
+  precoAntigo: 99.90,
+  precoAtual: 68.98,
+  loja: "amazon",
+  link: "https://link.amazon/B0iuWCCoM"
+},
+{
+  nome: "Óleo Dove Bond Intense Repair",
+  categoria: "Beleza",
+  imagem: "IMG_oleodove.jpg",
+  precoAntigo: 50.03,
+  precoAtual: 32.39,
+  loja: "amazon",
+  link: "https://link.amazon/B01HomcTj"
+},
+{
+  nome: "Protetor Solar em bastão ISDIN FPS50",
+  categoria: "Beleza",
+  imagem: "IMG_protetorbastaoisdin.jpg",
+  precoAntigo: 121.90,
+  precoAtual: 111.06,
+  loja: "amazon",
+  link: "https://link.amazon/B05RScZm7"
+},
+{
+  nome: "Escova secadora Britania Bivolt",
+  categoria: "Beleza",
+  imagem: "IMG_escovabritania.jpg",
+  precoAntigo: 157.07,
+  precoAtual: 99.90,
+  loja: "amazon",
+  link: "https://link.amazon/B06JfoTjp"
+},
+{
+  nome: "Chapinha Ceramica Preta Taiff Bivolt",
+  categoria: "Beleza",
+  imagem: "IMG_chapinhataiff.jpg",
+  precoAntigo: 129.90,
+  precoAtual: 90.88,
+  loja: "amazon",
+  link: "https://link.amazon/B0i04Avgz"
+},
+{
+  nome: "Gel de limpeza facial Eucerin",
+  categoria: "Beleza",
+  imagem: "IMG_gelfacialeucerin.jpg",
+  precoAntigo: 109.90,
+  precoAtual: 74.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0g1oanVJ"
+},
+{
+  nome: "Máscara de tratamento Collagen Lifter Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_hidratacaoelseveroxo.jpg",
+  precoAntigo: 40.99,
+  precoAtual: 31.46,
+  loja: "amazon",
+  link: "https://link.amazon/B0clZ0rUW"
+},
+    {
+  nome: "Água Micelar Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_aguamicelarelseve.jpg",
+  precoAntigo: 69.39,
+  precoAtual: 35.37,
+  loja: "amazon",
+  link: "https://link.amazon/B0ft4jffN"
+},
+ {
+   nome: "NeoStrata Protetor com cor",
+   categoria: "Beleza",
+   imagem: "IMG_neostratacor.jpg",
+   precoAntigo: 124.99,
+   precoAtual: 80.66,
+   loja: "amazon",
+   link: "https://link.amazon/B097jxao9"
+ },
+  {
+    nome: "Microondas Mondial",
+    categoria: "Casa",
+    imagem: "IMG_microondasmondialpreto.jpg",
+    precoAntigo: 647.79,
+    precoAtual: 454.75,
+    loja: "amazon",
+    link: "https://link.amazon/B00Z9gEho"
+  },
+   {
+   nome: "Combo Pringles",
+   categoria: "Achadinhos",
+   imagem: "IMG_pringles.jpg",
+   precoAntigo: 32.90,
+   precoAtual: 28.88,
+   loja: "amazon",
+   link: "https://link.amazon/B0f8PL4FO"
+ },
+ {
+  nome: "Percabonato 100% Puro",
+  categoria: "Achadinhos",
+  imagem: "IMG_percabonato.JPG",
+  precoAntigo: 30.00,
+  precoAtual: 16.99,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/gPQjbrg25"
+},
+ {
+   nome: "Jogo de lençol 400 fios",
+   categoria: "Casa",
+   imagem: "IMG_jogodecamaliso.JPG",
+   precoAntigo: 110.00,
+   precoAtual: 40.50,
+   loja: "shopee",
+   link: "https://s.shopee.com.br/40frSIZnfH"
+ },
+ {
+  nome: "Lenços umidecidos bepantol baby 192 unidades",
+  categoria: "Bebê",
+  imagem: "IMG_lencosbepantol.jpg",
+  precoAntigo: 55.97,
+  precoAtual: 44.99,
+  loja: "amazon",
+  link: "https://link.amazon/B083NLdrI"
+},
+ {
+   nome: "Leavein ELSEVE Collagen Lifter",
+   categoria: "Beleza",
+   imagem: "IMG_lorealcollagen.jpg",
+   precoAntigo: 55.09,
+   precoAtual: 33.90,
+   loja: "amazon",
+   link: "https://link.amazon/B08Hen0V0"
+ },
+{
+  nome: "Mascara de Tratamento Capilar Wella Fusion",
+  categoria: "Beleza",
+  imagem: "IMG_hidratacaowellafusion.jpg",
+  precoAntigo: 302.00,
+  precoAtual: 207.00,
+  loja: "amazon",
+  link: "https://link.amazon/B09a7Wueo"
+},
+{
+  nome: "Listerine 1L",
+  categoria: "Beleza",
+  imagem: "IMG_listerine.jpg",
+  precoAntigo: 41.99,
+  precoAtual: 34.78,
+  loja: "amazon",
+  link: "https://link.amazon/B01nnOJee"
+},
+{
+  nome: "Mascara de Tratamento Capilar Wella Invigo",
+  categoria: "Beleza",
+  imagem: "IMG_hidratacaowellainvigo.jpg",
+  precoAntigo: 146.00,
+  precoAtual: 107.01,
+  loja: "amazon",
+  link: "https://link.amazon/B07JXmfDu"
+},
+{
+  nome: "Jogo de facas tramontina",
+  categoria: "Casa",
+  imagem: "IMG_faqueirotramontina.jpg",
+  precoAntigo: 138.31,
+  precoAtual: 80.21,
+  loja: "amazon",
+  link: "https://link.amazon/B0iogkUo4"
+},
+{
+  nome: "Umidificador de ar Wolff",
+  categoria: "Casa",
+  imagem: "IMG_umidificadorwolff.jpg",
+  precoAntigo: 47.40,
+  precoAtual: 38.99,
+  loja: "amazon",
+  link: "https://link.amazon/B0eFS2kVe"
+},
+{
+  nome: "Mascara Capilar Densidade Lola",
+  categoria: "Beleza",
+  imagem: "IMG_loladensidade.jpg",
+  precoAntigo: 49.90,
+  precoAtual: 30.95,
+  loja: "amazon",
+  link: "https://link.amazon/B0dW4Flke"
+},
+{
+  nome: "Mascara Capilar Rapunzel Lola",
+  categoria: "Beleza",
+  imagem: "IMG_lolarapunzel.jpg",
+  precoAntigo: 64.90,
+  precoAtual: 34.87,
+  loja: "amazon",
+  link: "https://link.amazon/B0crTrWMH"
+},
+{
+  nome: "Mascara Capilar Nutri Acid Complex Siage",
+  categoria: "Beleza",
+  imagem: "IMG_siagehidratacao.jpg",
+  precoAntigo: 74.00,
+  precoAtual: 48.90,
+  loja: "amazon",
+  link: "https://link.amazon/B093knfzP"
+},
+{
+  nome: "Miss Gabriela de Gabriela Sabatini",
+  categoria: "Beleza",
+  imagem: "IMG_gabrielasabatine.jpg",
+  precoAntigo: 119.00,
+  precoAtual: 86.09,
+  loja: "amazon",
+  link: "https://link.amazon/B0e1GeXEG"
+},
+{
+  nome: "Oceane esponja de maquiagem azul",
+  categoria: "Beleza",
+  imagem: "IMG_esponjaoceane.jpg",
+  precoAntigo: 32.50,
+  precoAtual: 23.90,
+  loja: "amazon",
+  link: "https://link.amazon/B02W3uu9M"
+},
+{
+  nome: "Blend 7 oleos BeautyColor",
+  categoria: "Beleza",
+  imagem: "IMG_oleobeautycolor.jpg",
+  precoAntigo: 41.90,
+  precoAtual: 35.30,
+  loja: "amazon",
+  link: "https://link.amazon/B06qB2sle"
+},
+{
+  nome: "Leavein Essencial Seca Sem Frizz",
+  categoria: "Beleza",
+  imagem: "IMG_frizzessencial.jpg",
+  precoAntigo: 61.90,
+  precoAtual: 33.90,
+  loja: "amazon",
+  link: "https://link.amazon/B06ljSSGh"
+},
+{
+  nome: "Acidificante Densidade Lola",
+  categoria: "Beleza",
+  imagem: "IMG_lolaacidificantedensidade.jpg",
+  precoAntigo: 59.90,
+  precoAtual: 32.99,
+  loja: "amazon",
+  link: "https://link.amazon/B0jedZQTa"
+},
+{
+  nome: "Jogo de cama queen",
+  categoria: "Casa",
+  imagem: "IMG_jogodecamafloral.jpg",
+  precoAntigo: 71.95,
+  precoAtual: 42.57,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/gPnR8vKXQ"
+},
+{
+  nome: "Creme facial cicatricure",
+  categoria: "Beleza",
+  imagem: "IMG_cicatricureolhos.jpg",
+  precoAntigo: 62.99,
+  precoAtual: 47.40,
+  loja: "amazon",
+  link: "https://link.amazon/B0gvPnFpF"
+},
+ {
+   nome: "Buba garrafa de aluminio",
+   categoria: "Bebê",
+   imagem: "IMG_garrafaaluminiobuba.jpg",
+   precoAntigo: 70.90,
+   precoAtual: 33.81,
+   loja: "amazon",
+   link: "https://link.amazon/B0ieufMcC"
+ },
+ {
+  nome: "Kit 4 blusas básicas canelada",
+  categoria: "Moda",
+  imagem: "IMG_kitblusacanelada.jpg",
+  precoAntigo: 99.90,
+  precoAtual: 59.79,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/AUtipXOLHZ"
+},
+{
+  nome: "Protetor solar corporal actine",
+  categoria: "Beleza",
+  imagem: "IMG_protetoractinecorporal.jpg",
+  precoAntigo: 84.99,
+  precoAtual: 72.15,
+  loja: "amazon",
+  link: "https://link.amazon/B05bYwqVL"
+},
+{
+  nome: "Pijama americano liso",
+  categoria: "Moda",
+  imagem: "IMG_pijamaamericano.jpg",
+  precoAntigo: 50.00,
+  precoAtual: 25.90,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/2VrRIy2yJh"
+},
+{
+  nome: "Xô bactéria higienizador para bebês",
+  categoria: "Bebê",
+  imagem: "IMG_xobacteria.jpg",
+  precoAntigo: 49.90,
+  precoAtual: 39.40,
+  loja: "amazon",
+  link: "https://link.amazon/B01zvkkVl"
+},
+{
+  nome: "Sérum Glycolic Gloss Elseve",
+  categoria: "Beleza",
+  imagem: "IMG_glycolicglossserum.jpg",
+  precoAntigo: 44.89,
+  precoAtual: 33.49,
+  loja: "amazon",
+  link: "https://link.amazon/B05BJ3odn"
+},
+{
+  nome: "Conjunto Alfaiataria short e colete",
+  categoria: "Moda",
+  imagem: "IMG_conjuntoalfaiatariashort.jpg",
+  precoAntigo: 60.00,
+  precoAtual: 48.85,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/7psxexdoxL"
+},
+   {
+    nome: "Algodão quadrado Jonhsons baby",
+    categoria: "Bebê",
+    imagem: "IMG_algodaoquadradojohnsons.jpg",
+    precoAntigo: 34.99,
+    precoAtual: 29.90,
+    loja: "amazon",
+    link: "https://link.amazon/B08d8gtrf"
+  },
+  {
+  nome: "Kit Bepantol Baby 3 unidades",
+  categoria: "Bebê",
+  imagem: "IMG_kit3bepantol.jpg",
+  precoAntigo: 169.90,
+  precoAtual: 134.70,
+  loja: "amazon",
+  link: "https://link.amazon/B0hOwZm0R"
+},
+  {
+  nome: "Air Fryer Philips Walita 6L",
+  categoria: "Casa",
+  imagem: "IMG_airfryerphilipswalita.jpg",
+  precoAntigo: 549.90,
+  precoAtual: 348.99,
+  loja: "amazon",
+  link: "https://link.amazon/B07dxRZKA"
+},
+ {
+   nome: "Kit prato fundo branco 6 unidades tramontina",
+   categoria: "Casa",
+   imagem: "IMG_kitpratofundobrancotramontina.jpg",
+   precoAntigo: 134.58,
+   precoAtual: 87.58,
+   loja: "amazon",
+   link: "https://link.amazon/B08Q07JHF"
+ },
+{
+  nome: "Jogo de Panelas Tramontina Turim 10 peças",
+  categoria: "Casa",
+  imagem: "IMG_panelaspretastramontina.jpg",
+  precoAntigo: 581.27,
+  precoAtual: 378.17,
+  loja: "amazon",
+  link: "https://link.amazon/B0fyGwSMy"
+},
+{
+  nome: "Dr Peanut Avelã",
+  categoria: "Achadinhos",
+  imagem: "IMG_drpeanutavela.jpg",
+  precoAntigo: 59.90,
+  precoAtual: 46.97,
+  loja: "amazon",
+  link: "https://link.amazon/B082ghMpP"
+},
+  {
+  nome: "Headphone Philips",
+  categoria: "Eletronicos",
+  imagem: "IMG_headphonephilips.jpg",
+  precoAntigo: 149.00,
+  precoAtual: 109.90,
+  loja: "amazon",
+  link: "https://link.amazon/B0fLQfgnE"
+},
+    {
+   nome: "Loçao hidratante baby dermaprotect",
+   categoria: "Bebê",
+   imagem: "IMG_hidratantejohnsonsbaby.jpg.jpg",
+   precoAntigo: 86.99,
+   precoAtual: 62.63,
+   loja: "amazon",
+   link: "https://link.amazon/B0hhsUEIF"
+    }
+  ];
+
+  const CATEGORIAS = ["Todos", "Casa", "Moda", "Beleza", "Bebê", "Eletrônicos", "Achadinhos"];
+  const NOME_LOJA = { amazon: "Amazon", shopee: "Shopee", mercadolivre: "Mercado Livre" };
+
+  let categoriaAtiva = "Todos";
+
+  function formatarPreco(valor){
+    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+
+  function calcularDesconto(antigo, atual){
+    return Math.round((1 - atual / antigo) * 100);
+  }
+
+  function renderizarChips(){
+    const container = document.getElementById("categorias");
+    container.innerHTML = "";
+    CATEGORIAS.forEach(cat => {
+      const chip = document.createElement("button");
+      chip.className = "chip" + (cat === categoriaAtiva ? " ativo" : "");
+      chip.textContent = cat;
+      chip.onclick = () => {
+        categoriaAtiva = cat;
+        renderizarChips();
+        renderizarProdutos();
+      };
+      container.appendChild(chip);
+    });
+  }
+
+  function renderizarProdutos(){
+    const grid = document.getElementById("grid");
+    const contagem = document.getElementById("contagem");
+    const lista = categoriaAtiva === "Todos"
+      ? produtos
+      : produtos.filter(p => p.categoria === categoriaAtiva);
+
+    contagem.textContent = `${lista.length} oferta${lista.length !== 1 ? "s" : ""}`;
+
+    if(lista.length === 0){
+      grid.innerHTML = `<p class="vazio">Nenhum achadinho nessa categoria ainda 💜</p>`;
+      grid.style.display = "block";
+      return;
+    }
+
+    grid.style.display = "grid";
+  grid.innerHTML = lista.map((p, indice) =>  {
+      const desconto = calcularDesconto(p.precoAntigo, p.precoAtual);
+      return `
+       <div class="card" id="produto-${indice}">
+          <div class="foto-wrap">
+            <img src="${p.imagem}" alt="${p.nome}">
+            <span class="desconto">-${desconto}%</span>
+            <span class="loja-badge loja-${p.loja}">${NOME_LOJA[p.loja]}</span>
+          </div>
+          <div class="info">
+            <span class="categoria-label">${p.categoria}</span>
+            <span class="nome">${p.nome}</span>
+            <div class="precos">
+              <span class="preco-antigo">${formatarPreco(p.precoAntigo)}</span>
+              <span class="preco-atual">${formatarPreco(p.precoAtual)}</span>
+            </div>
+           <a class="btn-oferta" href="${p.link}" target="_blank" rel="noopener">Ver oferta 🛒</a>
+           <button class="btn-compartilhar" onclick="compartilharProduto('${gerarSlug(p.nome)}', '${p.nome.replace(/'/g, " \\'")}')">
+  📤 Compartilhar
+</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function aplicarLinks(){
+    document.getElementById("link-vip-whatsapp").href = LINKS.grupoVipWhatsapp;
+    document.getElementById("link-instagram").href = LINKS.instagram;
+    document.getElementById("link-whatsapp").href = LINKS.whatsapp;
+  }
+
+ function gerarSlug(nome) {
+  return nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function abrirProdutoDoLink() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("produto");
+  
+  if (!slug) return;
+  
+  const produto = produtos.find(p => gerarSlug(p.nome) === slug);
+  
+  if (!produto) return;
+  
+  categoriaAtiva = produto.categoria;
+  renderizarChips();
+  renderizarProdutos();
+  
+  setTimeout(() => {
+    const cards = document.querySelectorAll(".card");
+    
+    cards.forEach(card => {
+      const nome = card.querySelector(".nome");
+      
+      if (nome && nome.textContent === produto.nome) {
+        card.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+        
+        card.style.outline = "3px solid #8b5cf6";
+        card.style.borderRadius = "16px";
+      }
+    });
+  }, 100);
+}
+async function compartilharProduto(slug, nome) {
+const url = `${window.location.origin}/?produto=${slug}`;
+
+if (navigator.share) {
+try {
+await navigator.share({
+title: `Ams.promo - ${nome}`,
+text: `Olha esse achadinho! 🛍️✨ ${nome}`,
+url: url
+});
+} catch (erro) {
+// Usuário cancelou o compartilhamento
+}
+} else {
+try {
+await navigator.clipboard.writeText(url);
+alert("Link do produto copiado! 💜");
+} catch (erro) {
+alert("Não foi possível copiar o link.");
+}
+}
+}
+aplicarLinks();
+renderizarChips();
+renderizarProdutos();
+abrirProdutoDoLink();
+</script>
+
+</body>
+</html>
