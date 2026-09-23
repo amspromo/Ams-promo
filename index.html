@@ -3,356 +3,1007 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMS PROMO — Achadinhos Amazon, Shopee e Mercado Livre</title>
+<title>ACM PROMO — Achadinhos e Ofertas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --roxo-escuro: #3B1264;
-    --roxo: #6C2BD9;
-    --roxo-claro: #A985F0;
-    --lilas-fundo: #F6F1FF;
-    --magenta: #E0299A;
-    --texto: #241537;
-    --texto-suave: #6E6180;
-    --branco: #FFFFFF;
-    --borda: #E7DBFB;
-    --radius: 14px;
+:root {
+  --roxo-escuro: #35105D;
+  --roxo: #6C2BD9;
+  --roxo-claro: #A985F0;
+  --lilas: #F4EEFF;
+  --lilas-2: #EDE3FF;
+  --magenta: #E0299A;
+  --rosa: #F7DDF0;
+  --texto: #241537;
+  --texto-suave: #756987;
+  --branco: #FFFFFF;
+  --verde: #25D366;
+  --borda: #E6D9F7;
+  --sombra: 0 8px 25px rgba(67, 31, 110, .10);
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: var(--texto);
+  font-family: "Manrope", sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(12px);
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.logo-linha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--roxo-escuro);
+}
+
+.logo span,
+.footer-logo span {
+  color: var(--magenta);
+}
+
+.tagline {
+  margin: 3px 0 13px;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.categorias {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 3px;
+  scrollbar-width: none;
+  justify-content: center;
+}
+
+.categorias::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  border: 1px solid var(--borda);
+  background: var(--branco);
+  color: var(--texto);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+.chip.ativo {
+  background: var(--roxo);
+  color: white;
+  border-color: var(--roxo);
+}
+
+/* =========================
+   HERO
+========================= */
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero {
+  margin: 24px 16px 0;
+  padding: 34px 28px;
+  min-height: 300px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255,255,255,.18), transparent 25%),
+    linear-gradient(135deg, #35105D, #6C2BD9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(67,31,110,.18);
+}
+
+.hero-texto {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.hero-mini,
+.mini-titulo {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.hero-mini {
+  display: inline-block;
+  background: rgba(255,255,255,.14);
+  padding: 7px 11px;
+  border-radius: 999px;
+  margin-bottom: 13px;
+}
+
+.hero h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(36px, 6vw, 62px);
+  line-height: .98;
+  letter-spacing: -2.5px;
+  margin: 0 0 16px;
+}
+
+.hero p {
+  margin: 0 0 24px;
+  max-width: 480px;
+  color: rgba(255,255,255,.86);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  color: var(--roxo-escuro);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 13px;
+  transition: .2s ease;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+}
+
+.hero-decoracao {
+  font-size: clamp(90px, 15vw, 170px);
+  opacity: .18;
+  transform: rotate(-10deg);
+  user-select: none;
+}
+
+/* =========================
+   FAIXA ANIMADA
+========================= */
+
+.faixa {
+  overflow: hidden;
+  background: var(--roxo-escuro);
+  color: white;
+  margin-top: 22px;
+  padding: 11px 0;
+  white-space: nowrap;
+}
+
+.faixa-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 42px;
+  min-width: max-content;
+  animation: rodarFaixa 24s linear infinite;
+}
+
+.faixa-track span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .8px;
+}
+
+@keyframes rodarFaixa {
+  from {
+    transform: translateX(0);
   }
 
-  *{ box-sizing: border-box; margin:0; padding:0; }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
-  html{ -webkit-tap-highlight-color: transparent; }
+/* =========================
+   SEÇÕES
+========================= */
 
-  body{
-    background: var(--lilas-fundo);
-    color: var(--texto);
-    font-family: 'Manrope', sans-serif;
-    padding-bottom: 40px;
+.secao {
+  padding: 42px 16px 10px;
+}
+
+.titulo-secao {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.titulo-secao h2 {
+  margin: 5px 0 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+.mini-titulo {
+  color: var(--magenta);
+}
+
+.arraste {
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.contagem {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================
+   CARROSSEL
+========================= */
+
+.carrossel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 4px 3px 16px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.carrossel::-webkit-scrollbar {
+  height: 5px;
+}
+
+.carrossel::-webkit-scrollbar-thumb {
+  background: var(--roxo-claro);
+  border-radius: 999px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  flex: 0 0 245px;
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  scroll-snap-align: start;
+  animation: subir .45s ease both;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(67,31,110,.15);
+}
+
+.foto-wrap {
+  height: 220px;
+  background: var(--lilas);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.foto-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+}
+
+.desconto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--magenta);
+  color: white;
+  padding: 6px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.loja-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: white;
+  color: var(--texto);
+  font-size: 10px;
+  font-weight: 800;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+.loja-amazon {
+  color: #111111;
+}
+
+.loja-shopee {
+  color: #ee4d2d;
+}
+
+.loja-mercadolivre {
+  color: #555;
+}
+
+.info {
+  padding: 15px;
+}
+
+.categoria-label {
+  display: block;
+  color: var(--roxo);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.nome {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.precos {
+  margin-top: 12px;
+}
+
+.preco-antigo {
+  display: block;
+  color: #9a90a5;
+  text-decoration: line-through;
+  font-size: 11px;
+}
+
+.preco-atual {
+  display: block;
+  color: var(--roxo-escuro);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.btn-oferta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--roxo);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.btn-compartilhar {
+  width: 40px;
+  border: 1px solid var(--borda);
+  background: var(--lilas);
+  color: var(--roxo);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* =========================
+   LISTA VERTICAL
+========================= */
+
+.lista-vertical {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.lista-vertical .card {
+  width: 100%;
+  min-width: 0;
+}
+
+.vazio {
+  width: 100%;
+  padding: 35px 20px;
+  background: var(--lilas);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--texto-suave);
+  font-weight: 700;
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  h1,h2,.logo,.preco-atual,.chip{
-    font-family: 'Space Grotesk', sans-serif;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   PET
+========================= */
+
+.pet-banner {
+  margin: 50px 16px 5px;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #F4EEFF, #F7DDF0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.pet-banner-texto {
+  max-width: 650px;
+}
+
+.pet-banner h2 {
+  margin: 5px 0 8px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 30px;
+}
+
+.pet-banner p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pet-patinha {
+  font-size: 80px;
+  opacity: .65;
+}
+
+.pet-vazio {
+  min-width: 100%;
+}
+
+/* =========================
+   WHATSAPP VIP
+========================= */
+
+.vip {
+  margin: 50px 16px;
+  padding: 30px;
+  border-radius: 24px;
+  background: var(--roxo-escuro);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  box-shadow: 0 15px 40px rgba(53,16,93,.18);
+}
+
+.vip-emoji {
+  width: 65px;
+  height: 65px;
+  flex: 0 0 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgba(255,255,255,.1);
+  font-size: 30px;
+}
+
+.vip-conteudo h2 {
+  margin: 5px 0 7px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 25px;
+}
+
+.vip-conteudo p {
+  margin: 0 0 17px;
+  color: rgba(255,255,255,.75);
+  font-size: 13px;
+}
+
+.btn-vip {
+  display: inline-flex;
+  background: var(--verde);
+  color: white;
+  padding: 11px 17px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  margin-top: 60px;
+  padding: 35px 20px;
+  background: var(--lilas);
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--roxo-escuro);
+}
+
+footer > p {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.rede-icone {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: white;
+  color: var(--roxo);
+  border: 1px solid var(--borda);
+}
+
+.rede-icone svg {
+  width: 19px;
+  height: 19px;
+}
+
+.aviso-afiliado {
+  max-width: 650px;
+  margin: 20px auto 0 !important;
+  font-size: 10px !important;
+  line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+  .lista-vertical {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+
+  header {
+    padding: 13px 12px 11px;
   }
 
-  a{ text-decoration:none; color:inherit; }
-
-  /* ---------- Header ---------- */
-  header{
-    position: sticky;
-    top:0;
-    z-index: 10;
-    background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo) 70%);
-    padding: 18px 16px 14px;
-    color: var(--branco);
+  .logo {
+    font-size: 25px;
   }
 
-  .logo-linha{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom: 4px;
+  .categorias {
+    justify-content: flex-start;
   }
 
-  .logo{
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
+  .hero {
+    margin: 18px 12px 0;
+    padding: 28px 22px;
+    min-height: 290px;
   }
 
-  .logo span{ color: #FFD166; }
+  .hero h1 {
+    font-size: 40px;
+  }
 
-  .tagline{
+  .hero p {
     font-size: 13px;
-    color: #E3D6FF;
-    margin-bottom: 14px;
   }
 
-  /* Chips de categoria */
-  .categorias{
-    display:flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-  }
-  .categorias::-webkit-scrollbar{ display:none; }
-
-  .chip{
-    flex: 0 0 auto;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: var(--branco);
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background .15s ease, transform .1s ease;
+  .hero-decoracao {
+    position: absolute;
+    right: -15px;
+    bottom: -20px;
+    font-size: 110px;
   }
 
-  .chip.ativo{
-    background: var(--branco);
-    color: var(--roxo-escuro);
-    border-color: var(--branco);
+  .secao {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  .chip:active{ transform: scale(0.96); }
-
-  /* ---------- Grid de produtos ---------- */
-  main{
-    padding: 16px;
-    max-width: 620px;
-    margin: 0 auto;
+  .titulo-secao h2 {
+    font-size: 24px;
   }
 
-  .contagem{
-    font-size: 13px;
-    color: var(--texto-suave);
-    margin: 4px 4px 12px;
+  .arraste {
+    font-size: 10px;
   }
 
-  .grid{
-    display: grid;
+  .carrossel {
+    margin-right: -12px;
+  }
+
+  .card {
+    flex-basis: 225px;
+  }
+
+  .foto-wrap {
+    height: 205px;
+  }
+
+  .lista-vertical {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  .card{
-    background: var(--branco);
-    border-radius: var(--radius);
-    border: 1px solid var(--borda);
-    overflow: hidden;
-    display:flex;
+  .lista-vertical .card {
+    border-radius: 15px;
+  }
+
+  .lista-vertical .foto-wrap {
+    height: 170px;
+  }
+
+  .lista-vertical .info {
+    padding: 12px;
+  }
+
+  .lista-vertical .preco-atual {
+    font-size: 18px;
+  }
+
+  .pet-banner {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 22px;
+  }
+
+  .pet-banner h2 {
+    font-size: 25px;
+  }
+
+  .pet-patinha {
+    font-size: 55px;
+  }
+
+  .vip {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 22px;
+    align-items: flex-start;
+  }
+
+  .vip-emoji {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+    font-size: 24px;
+  }
+
+  .vip-conteudo h2 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 430px) {
+
+  .lista-vertical {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lista-vertical .nome {
+    font-size: 12px;
+  }
+
+  .lista-vertical .foto-wrap {
+    height: 150px;
+  }
+
+  .lista-vertical .acoes {
     flex-direction: column;
   }
 
-  .foto-wrap{
-    position: relative;
-    aspect-ratio: 1 / 1;
-    background: var(--lilas-fundo);
-    overflow: hidden;
+  .lista-vertical .btn-compartilhar {
+    width: 100%;
+    height: 34px;
   }
-
-  .foto-wrap img{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    display:block;
-  }
-
-  .desconto{
-    position:absolute;
-    top:8px;
-    left:8px;
-    background: var(--magenta);
-    color: var(--branco);
-    font-size: 12px;
-    font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 999px;
-  }
-
-  .loja-badge{
-    position:absolute;
-    top:8px;
-    right:8px;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 3px 7px;
-    border-radius: 999px;
-    color: var(--branco);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-  .loja-amazon{ background:#1E1E1E; }
-  .loja-shopee{ background:#EE4D2D; }
-  .loja-mercadolivre{ background:#2D3277; }
-
-  .info{
-    padding: 10px 10px 12px;
-    display:flex;
-    flex-direction: column;
-    gap: 6px;
-    flex:1;
-  }
-
-  .categoria-label{
-    font-size: 11px;
-    color: var(--roxo);
-    font-weight: 700;
-  }
-
-  .nome{
-    font-size: 13px;
-    line-height: 1.35;
-    color: var(--texto);
-    min-height: 34px;
-  }
-
-  .precos{
-    display:flex;
-    align-items: baseline;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .preco-antigo{
-    font-size: 12px;
-    color: var(--texto-suave);
-    text-decoration: line-through;
-  }
-
-  .preco-atual{
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--roxo-escuro);
-  }
-
-  .btn-oferta{
-    margin-top: 4px;
-    background: var(--roxo);
-    color: var(--branco);
-    text-align: center;
-    padding: 9px 0;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    display:block;
-  }
-
-  .btn-oferta:active{ transform: scale(0.98); }
-
-  .vazio{
-    text-align: center;
-    color: var(--texto-suave);
-    padding: 40px 20px;
-    font-size: 14px;
-  }
-
-  @media (min-width: 480px){
-    .grid{ grid-template-columns: repeat(3, 1fr); }
-  }
-
-  /* ---------- Bloco VIP WhatsApp ---------- */
-  .vip{
-    margin: 28px 4px 8px;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    border-radius: var(--radius);
-    padding: 20px;
-    color: var(--branco);
-    text-align: center;
-  }
-
-  .vip-emoji{
-    font-size: 28px;
-    margin-bottom: 6px;
-  }
-
-  .vip h2{
-    font-size: 17px;
-    margin-bottom: 6px;
-  }
-
-  .vip p{
-    font-size: 13px;
-    color: #EAFBF1;
-    margin-bottom: 14px;
-    line-height: 1.4;
-  }
-
-  .btn-vip{
-    display:inline-flex;
-    align-items:center;
-    gap: 8px;
-    background: var(--branco);
-    color: #128C7E;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 11px 20px;
-    border-radius: 999px;
-  }
-
-  /* ---------- Rodapé ---------- */
-  footer{
-    margin: 32px 4px 0;
-    padding: 22px 16px 4px;
-    text-align: center;
-    border-top: 1px solid var(--borda);
-  }
-
-  .redes{
-    display:flex;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .rede-icone{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--roxo-escuro);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color: var(--branco);
-    transition: transform .12s ease;
-  }
-
-  .rede-icone:active{ transform: scale(0.92); }
-
-  .rede-icone svg{ width: 19px; height: 19px; }
-
-  .aviso-afiliado{
-    font-size: 11px;
-    line-height: 1.5;
-    color: var(--texto-suave);
-    max-width: 520px;
-    margin: 0 auto 18px;
-  }
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo-linha">
-    <span class="logo">AMS<span>.</span>PROMO</span>
+    <span class="logo">ACM<span>.</span>PROMO</span>
   </div>
-  <p class="tagline">Os melhores achadinhos da Amazon, Shopee e Mercado Livre 💜</p>
+
+  <p class="tagline">Achadinhos que valem o clique ✨</p>
+
   <div class="categorias" id="categorias"></div>
 </header>
 
 <main>
-  <p class="contagem" id="contagem"></p>
-  <div class="grid" id="grid"></div>
 
-  <section class="vip">
-    <div class="vip-emoji">💜</div>
-    <h2>Entre no grupo VIP do WhatsApp</h2>
-    <p>Receba as melhores promoções em primeira mão, direto no seu celular.</p>
-    <a class="btn-vip" href="#" id="link-vip-whatsapp" target="_blank" rel="noopener">
-      Entrar no grupo VIP
-    </a>
+  <!-- DESTAQUE PRINCIPAL -->
+  <section class="hero">
+    <div class="hero-texto">
+      <span class="hero-mini">✨ GARIMPOS DO DIA</span>
+      <h1>Ofertas que<br>valem a pena.</h1>
+      <p>Achadinhos selecionados para você comprar bem e gastar menos.</p>
+
+      <a href="#destaques" class="btn-hero">
+        🔥 Ver ofertas
+      </a>
+    </div>
+
+    <div class="hero-decoracao">
+      🛍️
+    </div>
   </section>
+
+
+  <!-- FAIXA ANIMADA -->
+  <div class="faixa">
+    <div class="faixa-track">
+      <span>🔥 OFERTAS DO DIA</span>
+      <span>💜 ACHADINHOS QUE VALEM O CLIQUE</span>
+      <span>🛒 PREÇOS ESPECIAIS</span>
+      <span>✨ ACM PROMO</span>
+
+      <span>🔥 OFERTAS DO DIA</span>
+      <span>💜 ACHADINHOS QUE VALEM O CLIQUE</span>
+      <span>🛒 PREÇOS ESPECIAIS</span>
+      <span>✨ ACM PROMO</span>
+    </div>
+  </div>
+
+
+  <!-- OFERTAS EM DESTAQUE -->
+  <section class="secao">
+    <div class="titulo-secao">
+      <div>
+        <span class="mini-titulo">🔥 AGORA</span>
+        <h2>Ofertas do dia</h2>
+      </div>
+
+      <span class="arraste">Arraste →</span>
+    </div>
+
+    <div class="carrossel" id="destaques"></div>
+  </section>
+
+
+  <!-- TODOS OS ACHADINHOS -->
+  <section class="secao" id="todos-achadinhos">
+
+    <div class="titulo-secao">
+      <div>
+        <span class="mini-titulo">🛍️ GARIMPOS</span>
+        <h2>Todos os achadinhos</h2>
+      </div>
+
+      <p class="contagem" id="contagem"></p>
+    </div>
+
+    <div class="lista-vertical" id="grid"></div>
+
+  </section>
+
+
+  <!-- PET -->
+  <section class="pet-banner">
+
+    <div class="pet-banner-texto">
+      <span class="mini-titulo">🐾 PARA OS PELUDOS</span>
+
+      <h2>Achadinhos Pet</h2>
+
+      <p>
+        Produtos para deixar a vida dos nossos companheiros ainda melhor. 🐶🐱
+      </p>
+    </div>
+
+    <div class="pet-patinha">
+      🐾
+    </div>
+
+  </section>
+
+
+  <section class="secao pet-secao">
+
+    <div class="titulo-secao">
+      <div>
+        <span class="mini-titulo">🐾 PET</span>
+        <h2>Ofertas para eles</h2>
+      </div>
+
+      <span class="arraste">Arraste →</span>
+    </div>
+
+    <div class="carrossel" id="pet-produtos"></div>
+
+  </section>
+
+
+  <!-- WHATSAPP -->
+  <section class="vip">
+
+    <div class="vip-emoji">💜</div>
+
+    <div class="vip-conteudo">
+      <span class="mini-titulo">📲 OFERTAS EM PRIMEIRA MÃO</span>
+
+      <h2>Entre no grupo VIP do WhatsApp</h2>
+
+      <p>
+        Receba as melhores promoções direto no seu celular.
+      </p>
+
+      <a
+        class="btn-vip"
+        href="#"
+        id="link-vip-whatsapp"
+        target="_blank"
+        rel="noopener"
+      >
+        Entrar no grupo VIP →
+      </a>
+    </div>
+
+  </section>
+
 </main>
 
+
 <footer>
-  <div class="redes">
-    <a class="rede-icone" href="#" id="link-instagram" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a class="rede-icone" href="#" id="link-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 7.2 3.8zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.2 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/></svg>
-    </a>
+
+  <div class="footer-logo">
+    ACM<span>.</span>PROMO
   </div>
-  <p class="aviso-afiliado">
-    AMS PROMO participa de programas de afiliados da Amazon, Mercado Livre e Shopee. Isso significa que podemos receber uma comissão sobre compras feitas através dos links deste site, sem custo adicional para você. Preços e disponibilidade podem mudar a qualquer momento.
+
+  <p>
+    Achadinhos que valem o clique. ✨
   </p>
+
+  <div class="redes">
+
+    <a
+      class="rede-icone"
+      href="#"
+      id="link-instagram"
+      target="_blank"
+      rel="noopener"
+      aria-label="Instagram"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle
+          cx="17.5"
+          cy="6.5"
+          r="1"
+          fill="currentColor"
+          stroke="none"
+        />
+      </svg>
+    </a>
+
+    <a
+      class="rede-icone"
+      href="#"
+      id="link-whatsapp"
+      target="_blank"
+      rel="noopener"
+      aria-label="WhatsApp"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 7.2 3.8zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.2 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/>
+      </svg>
+    </a>
+
+  </div>
+
+ <p class="aviso-afiliado">
+  <strong>Transparência:</strong> a ACM PROMO participa de programas de
+  afiliados de lojas e marketplaces. Alguns links publicados aqui são
+  links de afiliado e podem gerar uma comissão para a ACM PROMO quando
+  uma compra é realizada através deles, sem custo adicional para você.
+  Preços, promoções e disponibilidade podem mudar a qualquer momento.
+</p>
+
 </footer>
 
 <script>
@@ -361,7 +1012,6 @@
      ========================================================= */
   const LINKS = {
     grupoVipWhatsapp: "https://chat.whatsapp.com/CwyVIO7nFTsBVI0nlFo4sr?s=hd&p=i&mlu=4",
-    instagram: "https://www.instagram.com/ams.promo",
     whatsapp: "https://chat.whatsapp.com/CwyVIO7nFTsBVI0nlFo4sr?s=hd&p=i&mlu=4"
   };
 
@@ -374,6 +1024,11 @@
      loja: "amazon" | "shopee" | "mercadolivre"
      O desconto (%) é calculado sozinho a partir do preço antigo e do atual.
      ========================================================= */
+  const CONFIG = {
+  mostrarAmazon: false,
+  mostrarShopee: true,
+  mostrarMercadoLivre: true
+};
   const produtos = [
     {
   nome: "Contorno em bastão Niina Secrets",
@@ -449,7 +1104,7 @@
 },
 {
   nome: "Fone de ouvido sem fio Philips",
-  categoria: "Eletronicos",
+  categoria: "Eletrônicos",
   imagem: "IMG_fonephilips.jpg",
   precoAntigo: 144.00,
   precoAtual: 109.90,
@@ -1106,7 +1761,7 @@
 },
   {
   nome: "Headphone Philips",
-  categoria: "Eletronicos",
+  categoria: "Eletrônicos",
   imagem: "IMG_headphonephilips.jpg",
   precoAntigo: 149.00,
   precoAtual: 109.90,
@@ -1121,87 +1776,84 @@
    precoAtual: 62.63,
    loja: "amazon",
    link: "https://link.amazon/B0hhsUEIF"
-    }
+    },
+    {
+  nome: "Coleira Peitoral Cachorro e Gato, Conjunto de Guia + Coleira Tipo Colete para Pet Pequenos e Médios",
+  categoria: "Pet",
+  imagem: "IMG_coleirashopee.jpg",
+  precoAntigo: 39.00,
+  precoAtual: 19.00,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/3qNKezlNrj"
+},
+{
+  nome: "Comedouro Pet PERSONALIZADO com Nome com 2 Potes Inclusos",
+  categoria: "Pet",
+  imagem: "IMG_comedouropersonalizado.jpg",
+  precoAntigo: 39.90,
+  precoAtual: 25.00,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/W6sh0hJAw"
+},
+{
+  nome: "Dispensador Interativo de Comida para Pets em Forma de Pato Amarelo, Tigela Lenta para Pets",
+  categoria: "Pet",
+  imagem: "IMG_patoracao.jpg",
+  precoAntigo: 99.00,
+  precoAtual: 25.99,
+  loja: "shopee",
+  link: "https://s.shopee.com.br/7ptTQcL1iV"
+}
   ];
 
-  const CATEGORIAS = ["Todos", "Casa", "Moda", "Beleza", "Bebê", "Eletrônicos", "Achadinhos"];
-  const NOME_LOJA = { amazon: "Amazon", shopee: "Shopee", mercadolivre: "Mercado Livre" };
+ const CATEGORIAS = [
+  "Todos",
+  "Casa",
+  "Moda",
+  "Beleza",
+  "Bebê",
+  "Pet",
+  "Eletrônicos",
+  "Achadinhos"
+];
 
-  let categoriaAtiva = "Todos";
+const NOME_LOJA = {
+  amazon: "Amazon",
+  shopee: "Shopee",
+  mercadolivre: "Mercado Livre"
+};
 
-  function formatarPreco(valor){
-    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-  }
+let categoriaAtiva = "Todos";
 
-  function calcularDesconto(antigo, atual){
-    return Math.round((1 - atual / antigo) * 100);
-  }
 
-  function renderizarChips(){
-    const container = document.getElementById("categorias");
-    container.innerHTML = "";
-    CATEGORIAS.forEach(cat => {
-      const chip = document.createElement("button");
-      chip.className = "chip" + (cat === categoriaAtiva ? " ativo" : "");
-      chip.textContent = cat;
-      chip.onclick = () => {
-        categoriaAtiva = cat;
-        renderizarChips();
-        renderizarProdutos();
-      };
-      container.appendChild(chip);
-    });
-  }
+function produtoDisponivel(p) {
+  if (p.loja === "amazon") return CONFIG.mostrarAmazon;
+  if (p.loja === "shopee") return CONFIG.mostrarShopee;
+  if (p.loja === "mercadolivre") return CONFIG.mostrarMercadoLivre;
 
-  function renderizarProdutos(){
-    const grid = document.getElementById("grid");
-    const contagem = document.getElementById("contagem");
-    const lista = categoriaAtiva === "Todos"
-      ? produtos
-      : produtos.filter(p => p.categoria === categoriaAtiva);
+  return true;
+}
 
-    contagem.textContent = `${lista.length} oferta${lista.length !== 1 ? "s" : ""}`;
 
-    if(lista.length === 0){
-      grid.innerHTML = `<p class="vazio">Nenhum achadinho nessa categoria ainda 💜</p>`;
-      grid.style.display = "block";
-      return;
-    }
+function produtosVisiveis() {
+  return produtos.filter(produtoDisponivel);
+}
 
-    grid.style.display = "grid";
-  grid.innerHTML = lista.map((p, indice) =>  {
-      const desconto = calcularDesconto(p.precoAntigo, p.precoAtual);
-      return `
-       <div class="card" id="produto-${indice}">
-          <div class="foto-wrap">
-            <img src="${p.imagem}" alt="${p.nome}">
-            <span class="desconto">-${desconto}%</span>
-            <span class="loja-badge loja-${p.loja}">${NOME_LOJA[p.loja]}</span>
-          </div>
-          <div class="info">
-            <span class="categoria-label">${p.categoria}</span>
-            <span class="nome">${p.nome}</span>
-            <div class="precos">
-              <span class="preco-antigo">${formatarPreco(p.precoAntigo)}</span>
-              <span class="preco-atual">${formatarPreco(p.precoAtual)}</span>
-            </div>
-           <a class="btn-oferta" href="${p.link}" target="_blank" rel="noopener">Ver oferta 🛒</a>
-           <button class="btn-compartilhar" onclick="compartilharProduto('${gerarSlug(p.nome)}', '${p.nome.replace(/'/g, " \\'")}')">
-  📤 Compartilhar
-</button>
-          </div>
-        </div>
-      `;
-    }).join("");
-  }
 
-  function aplicarLinks(){
-    document.getElementById("link-vip-whatsapp").href = LINKS.grupoVipWhatsapp;
-    document.getElementById("link-instagram").href = LINKS.instagram;
-    document.getElementById("link-whatsapp").href = LINKS.whatsapp;
-  }
+function formatarPreco(valor) {
+  return valor.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
 
- function gerarSlug(nome) {
+
+function calcularDesconto(antigo, atual) {
+  return Math.round((1 - atual / antigo) * 100);
+}
+
+
+function gerarSlug(nome) {
   return nome
     .toLowerCase()
     .normalize("NFD")
@@ -1210,63 +1862,418 @@
     .replace(/^-+|-+$/g, "");
 }
 
-function abrirProdutoDoLink() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get("produto");
-  
-  if (!slug) return;
-  
-  const produto = produtos.find(p => gerarSlug(p.nome) === slug);
-  
-  if (!produto) return;
-  
-  categoriaAtiva = produto.categoria;
-  renderizarChips();
-  renderizarProdutos();
-  
-  setTimeout(() => {
-    const cards = document.querySelectorAll(".card");
-    
-    cards.forEach(card => {
-      const nome = card.querySelector(".nome");
-      
-      if (nome && nome.textContent === produto.nome) {
-        card.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-        
-        card.style.outline = "3px solid #8b5cf6";
-        card.style.borderRadius = "16px";
-      }
-    });
-  }, 100);
-}
-async function compartilharProduto(slug, nome) {
-const url = `${window.location.origin}/?produto=${slug}`;
 
-if (navigator.share) {
-try {
-await navigator.share({
-title: `Ams.promo - ${nome}`,
-text: `Olha esse achadinho! 🛍️✨ ${nome}`,
-url: url
-});
-} catch (erro) {
-// Usuário cancelou o compartilhamento
+function renderizarChips() {
+
+  const container = document.getElementById("categorias");
+
+  container.innerHTML = "";
+
+  CATEGORIAS.forEach(cat => {
+
+    const chip = document.createElement("button");
+
+    chip.className =
+      "chip" + (cat === categoriaAtiva ? " ativo" : "");
+
+    chip.textContent = cat;
+
+    chip.onclick = () => {
+
+      categoriaAtiva = cat;
+
+      renderizarChips();
+      renderizarProdutos();
+
+    };
+
+    container.appendChild(chip);
+
+  });
+
 }
-} else {
-try {
-await navigator.clipboard.writeText(url);
-alert("Link do produto copiado! 💜");
-} catch (erro) {
-alert("Não foi possível copiar o link.");
+
+
+function criarCard(p) {
+
+  const card = document.createElement("article");
+
+  card.className = "card";
+
+  const desconto =
+    calcularDesconto(p.precoAntigo, p.precoAtual);
+
+  card.innerHTML = `
+    <div class="foto-wrap">
+
+      <img
+        src="${p.imagem}"
+        alt="${p.nome}"
+        onerror="this.style.display='none'"
+      >
+
+      <span class="desconto">
+        -${desconto}%
+      </span>
+
+      <span class="loja-badge loja-${p.loja}">
+        ${NOME_LOJA[p.loja] || p.loja}
+      </span>
+
+    </div>
+
+    <div class="info">
+
+      <span class="categoria-label">
+        ${p.categoria}
+      </span>
+
+      <span class="nome">
+        ${p.nome}
+      </span>
+
+      <div class="precos">
+
+        <span class="preco-antigo">
+          ${formatarPreco(p.precoAntigo)}
+        </span>
+
+        <span class="preco-atual">
+          ${formatarPreco(p.precoAtual)}
+        </span>
+
+      </div>
+
+      <div class="acoes">
+
+        <a
+          class="btn-oferta"
+          href="${p.link}"
+          target="_blank"
+          rel="noopener"
+        >
+          Ver oferta 🛒
+        </a>
+
+        <button class="btn-compartilhar">
+          📤
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+
+  const botaoCompartilhar =
+    card.querySelector(".btn-compartilhar");
+
+
+  botaoCompartilhar.addEventListener("click", () => {
+
+    compartilharProduto(
+      gerarSlug(p.nome),
+      p.nome
+    );
+
+  });
+
+
+  return card;
 }
+
+
+function renderizarDestaques() {
+
+  const container =
+    document.getElementById("destaques");
+
+  if (!container) return;
+
+  const lista = produtosVisiveis()
+    .filter(p => p.precoAtual < p.precoAntigo)
+    .sort(
+      (a, b) =>
+        calcularDesconto(b.precoAntigo, b.precoAtual) -
+        calcularDesconto(a.precoAntigo, a.precoAtual)
+    )
+    .slice(0, 8);
+
+
+  container.innerHTML = "";
+
+
+  if (lista.length === 0) {
+
+    container.innerHTML = `
+      <div class="vazio">
+        Novos achadinhos em breve 💜
+      </div>
+    `;
+
+    return;
+  }
+
+
+  lista.forEach(p => {
+
+    container.appendChild(
+      criarCard(p)
+    );
+
+  });
+
 }
+
+
+function renderizarProdutos() {
+
+  const grid =
+    document.getElementById("grid");
+
+  const contagem =
+    document.getElementById("contagem");
+
+
+  if (!grid) return;
+
+
+  let lista = produtosVisiveis();
+
+
+  if (categoriaAtiva !== "Todos") {
+
+    lista = lista.filter(
+      p => p.categoria === categoriaAtiva
+    );
+
+  }
+
+
+  contagem.textContent =
+    `${lista.length} oferta${lista.length !== 1 ? "s" : ""}`;
+
+
+  grid.innerHTML = "";
+
+
+  if (lista.length === 0) {
+
+    grid.innerHTML = `
+      <div class="vazio">
+        Nenhum achadinho nessa categoria ainda 💜
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  lista.forEach(p => {
+
+    grid.appendChild(
+      criarCard(p)
+    );
+
+  });
+
 }
+
+
+function renderizarPet() {
+
+  const container =
+    document.getElementById("pet-produtos");
+
+  if (!container) return;
+
+
+  const lista =
+    produtosVisiveis()
+      .filter(p => p.categoria === "Pet");
+
+
+  container.innerHTML = "";
+
+
+  if (lista.length === 0) {
+
+    container.innerHTML = `
+      <div class="vazio pet-vazio">
+        🐾 Em breve teremos achadinhos para os peludos!
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  lista.forEach(p => {
+
+    container.appendChild(
+      criarCard(p)
+    );
+
+  });
+
+}
+
+
+function aplicarLinks() {
+
+  document.getElementById(
+    "link-vip-whatsapp"
+  ).href = LINKS.grupoVipWhatsapp;
+
+
+  document.getElementById(
+    "link-instagram"
+  ).href = LINKS.instagram;
+
+
+  document.getElementById(
+    "link-whatsapp"
+  ).href = LINKS.whatsapp;
+
+}
+
+
+async function compartilharProduto(slug, nome) {
+
+  const url =
+    `${window.location.origin}${window.location.pathname}?produto=${slug}`;
+
+
+  if (navigator.share) {
+
+    try {
+
+      await navigator.share({
+
+        title: `ACM Promo - ${nome}`,
+
+        text:
+          `Olha esse achadinho! 🛍️✨ ${nome}`,
+
+        url: url
+
+      });
+
+    } catch (erro) {
+
+      // Compartilhamento cancelado pelo usuário
+
+    }
+
+  } else {
+
+    try {
+
+      await navigator.clipboard.writeText(url);
+
+      alert(
+        "Link do produto copiado! 💜"
+      );
+
+    } catch (erro) {
+
+      alert(
+        "Não foi possível copiar o link."
+      );
+
+    }
+
+  }
+
+}
+
+
+function abrirProdutoDoLink() {
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const slug =
+    params.get("produto");
+
+
+  if (!slug) return;
+
+
+  const produto =
+    produtos.find(
+      p => gerarSlug(p.nome) === slug
+    );
+
+
+  if (!produto) return;
+
+
+  if (!produtoDisponivel(produto)) return;
+
+
+  categoriaAtiva =
+    produto.categoria;
+
+
+  renderizarChips();
+
+  renderizarProdutos();
+
+
+  setTimeout(() => {
+
+    const cards =
+      document.querySelectorAll(".card");
+
+
+    cards.forEach(card => {
+
+      const nome =
+        card.querySelector(".nome");
+
+
+      if (
+        nome &&
+        nome.textContent === produto.nome
+      ) {
+
+        card.scrollIntoView({
+
+          behavior: "smooth",
+
+          block: "center"
+
+        });
+
+
+        card.style.outline =
+          "3px solid #8b5cf6";
+
+        card.style.borderRadius =
+          "18px";
+
+      }
+
+    });
+
+  }, 150);
+
+}
+
+
 aplicarLinks();
+
 renderizarChips();
+
+renderizarDestaques();
+
 renderizarProdutos();
+
+renderizarPet();
+
 abrirProdutoDoLink();
 </script>
 
